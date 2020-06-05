@@ -35,6 +35,17 @@ services:
       ELASTICSEARCH_HOSTS: https://odfe-node1:9200
     networks:
       - odfe-net
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:7.0.1
+    container_name: logstash
+    volumes:
+    - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "514:514"
+    networks:
+      - odfe-net
+    depends_on:
+      - odfe-node1
 
 networks:
   odfe-net:
