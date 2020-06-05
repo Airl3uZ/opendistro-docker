@@ -10,6 +10,7 @@ services:
       - cluster.initial_master_nodes=odfe-node1
       - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - network.host=0.0.0.0
     ulimits:
       memlock:
         soft: -1
@@ -28,9 +29,7 @@ services:
     image: amazon/opendistro-for-elasticsearch-kibana:1.8.0
     container_name: odfe-kibana
     ports:
-      - 80:5601
-    expose:
-      - "80"
+      - "80:5601"
     environment:
       ELASTICSEARCH_URL: https://odfe-node1:9200
       ELASTICSEARCH_HOSTS: https://odfe-node1:9200
