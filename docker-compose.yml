@@ -47,7 +47,7 @@ services:
     networks:
       - odfe-net
     depends_on:
-      - odfe-node1
+      - odfe
 
 networks:
   odfe-net:
